@@ -371,6 +371,14 @@ end
 
 %% Método de Runge-Kutta de 3ªordem
 
+% Exemplo de tabela de Butcher para RK3
+
+% 0   | 
+% 1/2 | 1/2 
+% 3/4  | 0   3/4   
+% ----|----------------
+%     |  2/9   1/3   4/9
+
 clc, clear all, close all
 
 % Condições iniciais & finais
@@ -430,8 +438,8 @@ function [t, x, v] = runge_kutta_3(fv, fx, t0, x0, v0, h, t_end)
         k2x = fx(t(k) + h/2, x(k) + k1x * h/2, v(k) + k1v * h/2);
 
         % Parte 3
-        k3v = fv(t(k) + 3*h/4, x(k) + k2x * 3*h/4, v(k) + k2v * 3*h/4);
-        k3x = fx(t(k) + 3*h/4, x(k) + k2x * 3*h/4, v(k) + k2v * 3*h/4);
+        k3v = fv(t(k) + 3*h/4, x(k) + (h*0)*r1x + k2x * 3*h/4, v(k) + (h*0)*r1v + k2v * 3*h/4);
+        k3x = fx(t(k) + 3*h/4, x(k) + (h*0)*r1x + k2x * 3*h/4, v(k) + (h*0)*r1v + k2v * 3*h/4);
 
         % Update de x e v
         x(k+1) = x(k) + (h/9) * (2*k1x + 3*k2x + 4*k3x);
